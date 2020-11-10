@@ -4,6 +4,8 @@ import DonutLargeIcon from '@material-ui/icons/DonutLarge'
 import ChatIcon from '@material-ui/icons/Chat'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import {Avatar, IconButton} from "@material-ui/core";
+import { SearchOutlined } from '@material-ui/icons'
+import {SidebarChat} from "./SidebarChat";
 
 
 export class Sidebar extends React.Component {
@@ -23,9 +25,23 @@ export class Sidebar extends React.Component {
                         <IconButton>
                             <MoreVertIcon />
                         </IconButton>
-
+                        
                     </div>
 
+                </div>
+
+                <div className= "sidebar_search">
+                    <div className = "sidebar_searchContainer">
+                        <SearchOutlined />
+                        <input placeholder="Search or start new chat" type = "text" />
+
+                    </div>
+                </div>
+
+                <div className = "sidebar_chats">
+                    <SidebarChat />
+                    <SidebarChat />
+                    <SidebarChat />
                 </div>
 
             </div>
