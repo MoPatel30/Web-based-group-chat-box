@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 import { Avatar, IconButton } from '@material-ui/core'
 import { AttachFile, MoreVert, SearchOutlined } from '@material-ui/icons'
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon"
@@ -7,8 +8,7 @@ import React from 'react'
 import "./Chat.css"
 
 
-export class Chat extends React.Component {
-    render() {
+export default function Chat({messages}){
         return (
             <div className = "chat">
                <div className = "chat_header">
@@ -33,18 +33,16 @@ export class Chat extends React.Component {
                </div>
 
                <div className = "chat_body">
-                    <p className = "chat_message">
-                        <span className = "chat_name">Mo </span>           
-                        This is a message
-                        <span className = "chat_timestamp"> {new Date().toUTCString()} </span>
-                    </p>
-
-                    <p className = "chat_message chat_reciever">
-                        <span className = "chat_name">Mo </span>           
-                        This is a message
-                        <span className = "chat_timestamp"> {new Date().toUTCString()} </span>
-                    </p>
-
+                   {messages.map((message) => (
+                        // eslint-disable-next-line no-template-curly-in-string
+                        <p
+                            className = 'chat_message'
+                        >
+                            <span className = "chat_name">{message.name} </span>           
+                            {message.message}
+                            <span className = "chat_timestamp"> {message.timestamp} </span>
+                        </p>
+                   ))}
                </div>
 
                <div className = "chat_footer">
@@ -58,5 +56,4 @@ export class Chat extends React.Component {
         
             </div>
         )
-    }
 }
