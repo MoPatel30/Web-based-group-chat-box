@@ -1,9 +1,43 @@
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import "./SidebarChat.css";
 import {Avatar, IconButton} from "@material-ui/core";
 
 
+export function SidebarChatTwo({addNewChat}){
+    const [seed, setSeed] = useState("")
+    
+    useEffect(() => {
+        setSeed(Math.floor(Math.random()*5000))
 
+    }, [])
+
+
+    const createChat = () => {
+        const roomName = prompt("Please enter name for chat")
+
+        if(roomName){ 
+            // db stuff
+        }
+    }
+
+    return !addNewChat ? (
+        <div className = "sidebarChat">
+            <Avatar src = {`https://avatars.dicebear.com/api/human/${seed}.svg`} />
+            <div className = "sidebarChat_info">
+                <h2>Room Name</h2> 
+                <p> last message </p>
+            </div>
+
+        </div>
+
+    ): (
+        <div onClick={createChat} className = "sidebarChat">
+            <h2>Add new chat</h2>
+        </div>
+    )
+}
+
+export default SidebarChatTwo
 export class SidebarChat extends Component {
     render() {
         return (
@@ -19,4 +53,4 @@ export class SidebarChat extends Component {
     }
 }
 
-export default SidebarChat
+
