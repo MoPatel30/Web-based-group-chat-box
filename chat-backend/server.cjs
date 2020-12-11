@@ -3,6 +3,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 let Messages = require("./dbMessages.cjs")
+let Rooms = require("./dbRooms.cjs")
 let Pusher = require("pusher")
 const cors = require("cors")
 //import {express} from "express"
@@ -14,7 +15,7 @@ const port = process.env.PORT || 9000
 
 
 const pusher = new Pusher({
-
+ 
 });
 
 
@@ -24,7 +25,7 @@ app.use(cors())
 
 
 // DB config
-const connection_url = ''
+const connection_url = ""
 
 mongoose.connect(connection_url,{
     useCreateIndex: true,
@@ -64,9 +65,23 @@ db.once("open", () =>{
     })
 })
 
+
 // api routing (REST)
 app.get("/", (req, res) => res.status(200).send("hello world"))
 
+
+app.get("/rooms", (req, res) => {
+    console.log("got rooms")
+    Rooms.find((err, data) => {
+        if (err){
+            res.status(500).send(err)
+        }
+        else{
+            res.status(201).send(data)
+        }
+    })
+})
+    
 
 app.post("/messages/new", (req, res) => {
     const dbMessage = req.body

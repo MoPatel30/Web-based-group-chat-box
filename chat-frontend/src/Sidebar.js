@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import "./Sidebar.css"
 import DonutLargeIcon from '@material-ui/icons/DonutLarge'
 import ChatIcon from '@material-ui/icons/Chat'
@@ -6,48 +6,63 @@ import MoreVertIcon from '@material-ui/icons/MoreVert'
 import {Avatar, IconButton} from "@material-ui/core";
 import { SearchOutlined } from '@material-ui/icons'
 import {SidebarChat, SidebarChatTwo} from "./SidebarChat";
+import axios from "./axios"
+import { useStateValue } from './StateProvider'
 
 
-export class Sidebar extends React.Component {
-    render() {
-        return (
-            <div className = "sidebar">
+
+function Sidebar() {
+    const[rooms, setRooms] = useState([])
+    const [{user}, dispatch] = useStateValue()
+
+    useEffect(() => {
+        axios.get("http://localhost:9000/rooms")
+            .then((response) => {
+                setRooms(response)
+                
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        console.log(rooms)
+    }, [])
+    
+    return (
+        <div className = "sidebar">
             
-                <div className = "sidebar_header">
-                    <Avatar src = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F4-rLJ5DkECA%2Fmaxresdefault.jpg&f=1&nofb=1" />
-                    <div className = "sidebar_headerRight">
-                        <IconButton>
-                            <DonutLargeIcon />
-                        </IconButton>
-                        <IconButton>
-                            <ChatIcon />
-                        </IconButton>
-                        <IconButton>
-                            <MoreVertIcon />
-                        </IconButton>
-                        
-                    </div>
-
-                </div>
-
-                <div className= "sidebar_search">
-                    <div className = "sidebar_searchContainer">
-                        <SearchOutlined />
-                        <input placeholder="Search or start new chat" type = "text" />
-
-                    </div>
-                </div>
-
-                <div className = "sidebar_chats">
-                    <SidebarChat />
-                    <SidebarChatTwo addNewChat />
-                    <SidebarChat />
-                    <SidebarChatTwo />
-                    <SidebarChatTwo />
+            <div className = "sidebar_header">
+                <Avatar src = {user?.photoURL} />
+                 <div className = "sidebar_headerRight">
+                    <IconButton>
+                        <DonutLargeIcon />
+                    </IconButton>
+                    <IconButton>
+                        <ChatIcon />
+                    </IconButton>
+                    <IconButton>
+                        <MoreVertIcon />
+                    </IconButton>
                 </div>
 
             </div>
-        )
-    }
+            <div className= "sidebar_search">
+                <div className = "sidebar_searchContainer">
+                    <SearchOutlined />
+                    <input placeholder="Search or start new chat" type = "text" />
+
+                </div>
+            </div>
+
+            <div className = "sidebar_chats">
+                  
+                <SidebarChatTwo addNewChat />
+                <SidebarChatTwo />
+                <SidebarChatTwo />
+            </div>
+
+        </div>
+    )
+    
 }
 
+export default Sidebar
