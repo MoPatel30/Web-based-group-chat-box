@@ -1,15 +1,21 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useParams } from 'react';
 import Sidebar from "./Sidebar"
 import Chat from "./Chat"
 import Pusher from "pusher-js"
 import axios from "./axios"
 import Login from './Login'
+import { BrowserRouter, Route, Switch} from 'react-router-dom'
+import {createBrowserHistory} from 'history'
+import { useStateValue } from './StateProvider';
+import SidebarChatTwo from './SidebarChat';
+import {connect} from "react-redux"
 
 
-
-function App(){
+function App({ username }){
   const [messages, setMessages] = useState([])
+  //const [{user}, dispatch] = useStateValue()
+  console.log(username)
 
   useEffect(() => {
     axios.get("/messages/sync")
@@ -36,20 +42,71 @@ function App(){
   
   }, [messages])
 
-  
+
   return(
     <div className="app">
-      <div className = "app_body">
-        <Login />
-        <Sidebar />
-        <Chat messages = {messages}/> 
+      {username ? (
+        <div className = "app_body">
+          <BrowserRouter>
+            
+            <Switch>
+              <Sidebar />
 
-      </div>
+              <Route path = "/room/:roomId">
+                <Chat />
+              </Route>
+
+              <Route path = "">
+                <h1>Home Screen</h1>
+                <Sidebar />
+              </Route>
+
+            </Switch>
+
+          </BrowserRouter>
+
+
+        </div>
+             
+      )
+    : (
+      <Login />
         
+    )    
+    }
+     
     </div>
   )
 }
 
-export default App
+
+const mapStateToProps = state => {
+  return {username: state.username}
+}
 
 
+export default connect(mapStateToProps)(App);
+
+/*
+        <BrowserRouter>
+          <Sidebar />
+          
+          <Switch>
+            <Route path = "/">
+              <Login />
+            </Route>
+
+            <Route path = "/rooms/:roomId">
+              <Chat />
+            </Route>
+
+            <Route path = "/login">
+              <h1>Home Screen</h1>
+              <Login />
+            </Route>
+          </Switch>
+
+      </BrowserRouter>    
+
+
+*/

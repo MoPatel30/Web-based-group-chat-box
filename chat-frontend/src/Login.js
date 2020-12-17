@@ -4,22 +4,32 @@ import {Button} from "@material-ui/core"
 import {auth, provider} from "./firebase"
 import {actionTypes} from "./reducer"
 import {useStateValue} from "./StateProvider"
+import store from "./store/index"
+import {connect} from "react-redux"
+
 
 function Login() {
 
-    const [{}, dispatch] = useStateValue()
+    //const [{user}, dispatch] = useStateValue()
 
     const signIn = () => {
         auth
             .signInWithPopup(provider)
             .then((result) =>{
-                dispatch({
-                    type: actionTypes.SET_USER,
-                    user: result.user
-                })
+                console.log(result.user)
+                updateUserInfo(result.user.displayName)
             })
             .catch((error) => alert(error.message))    
     }
+
+
+    function updateUserInfo(userInfo){
+        store.dispatch({
+            type: "ADD_POST",
+            payload: userInfo
+        })
+    }
+
 
     return (
         <div className = "login">
@@ -39,4 +49,11 @@ function Login() {
     )
 }
 
-export default Login
+
+const mapDispatchToProps = dispatch => {
+    return {
+        dispatch
+    }
+}
+export default connect(mapDispatchToProps)(Login)
+
