@@ -16,12 +16,12 @@ function Chat({ username }){
     const [input, setInput] = useState("")
     const [rooms, setRooms] = useState([])
     const [curRoomID, setCurRoomID] = useState("")
-    const {roomId} = useParams()
+    //const {roomId} = useParams()
     const [messages, setMessages] = useState([])
-    
+   // console.log(roomId)
     
     useEffect(() => {
-        if(roomId){
+       /* if(roomId){
             axios.get("http://localhost:9000/rooms")
                 .then((response) => {
                     setRooms(response.data)                
@@ -31,17 +31,28 @@ function Chat({ username }){
                 })
 
             rooms.forEach(room => {
-                if(room.id === roomId){
+                if(room._id === roomId){
                     getRoomMessages(room._id)
                     setCurRoomID(room._id)
                 }        
             })
+            console.log(rooms)
+            console.log(curRoomID)
             
-        }
-    }, [roomId])
+        }*/
+        getRoomMessages()
+    }, [])
 
 
-    function getRoomMessages(roomID){
+    function getRoomMessages(){
+        axios.get(`http://localhost:9000/messages/sync`)
+        .then((response) => {
+            setMessages(response.data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+/*
         axios.get(`http://localhost:9000/rooms/${roomID}/messages`)
             .then((response) => {
                 setMessages(response.data.messages)
@@ -49,6 +60,7 @@ function Chat({ username }){
             .catch((error) => {
                 console.log(error)
             })
+            */
     }
 
 

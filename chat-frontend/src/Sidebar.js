@@ -33,6 +33,11 @@ function Sidebar({ username }) {
     }, [rooms])
     console.log(username)
 
+
+    function setRoomId(key){
+        console.log(key)
+    }
+
     return (
         <div className = "sidebar">
             

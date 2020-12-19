@@ -17,7 +17,7 @@ const port = process.env.PORT || 9000
 
 
 const pusher = new Pusher({
-    
+
 
 });
 
@@ -30,7 +30,7 @@ app.use(bodyParser.json())
 
 
 // DB config
-const connection_url = 
+const connection_url = ""
 mongoose.connect(connection_url,{
     useCreateIndex: true,
     useNewUrlParser: true,

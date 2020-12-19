@@ -47,30 +47,37 @@ function App({ username }){
     <div className="app">
       {username ? (
         <div className = "app_body">
+         
           <BrowserRouter>
             
             <Switch>
               <Sidebar />
+              <Chat />
 
-              <Route path = "/room/:roomId">
+              <Route path = "/rooms/:roomId">
+                <Chat />
+                <h1>yoooooooooooooooooooooooooooo</h1>
+              </Route>
+
+              <Route path = "/">
+                <h1>Home Screen</h1>
                 <Chat />
               </Route>
-
-              <Route path = "">
-                <h1>Home Screen</h1>
-                <Sidebar />
-              </Route>
-
+            
             </Switch>
 
           </BrowserRouter>
 
-
+          <Chat />
         </div>
              
       )
     : (
-      <Login />
+      <div>
+        <Login />
+
+      </div>
+ 
         
     )    
     }
