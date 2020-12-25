@@ -1,20 +1,17 @@
 import './App.css';
-import React, { useEffect, useState, useParams } from 'react';
-import Sidebar from "./Sidebar"
-import Chat from "./Chat"
+import React, { useEffect, useState} from 'react';
+import Sidebar from "./Sidebar/Sidebar"
+import Chat from "./Chat/Chat"
 import Pusher from "pusher-js"
 import axios from "./axios"
-import Login from './Login'
-import { BrowserRouter, Route, Switch} from 'react-router-dom'
-import {createBrowserHistory} from 'history'
-import { useStateValue } from './StateProvider';
-import SidebarChatTwo from './SidebarChat';
+import Login from './Login/Login'
+import {BrowserRouter, Switch} from 'react-router-dom'
 import {connect} from "react-redux"
 
 
 function App({ username }){
   const [messages, setMessages] = useState([])
-  //const [{user}, dispatch] = useStateValue()
+
   console.log(username)
 
   useEffect(() => {
@@ -32,9 +29,10 @@ function App({ username }){
 
     const channel = pusher.subscribe("messages")
     channel.bind("inserted", (newMessage) => {
+      alert(newMessage)
       setMessages([...messages, newMessage])
-    }) 
-
+    })
+    
     return () => {
       channel.unbind_all()
       channel.unsubscribe()
@@ -51,24 +49,13 @@ function App({ username }){
           <BrowserRouter>
             
             <Switch>
-              <Sidebar />
-              <Chat />
-
-              <Route path = "/rooms/:roomId">
-                <Chat />
-                <h1>yoooooooooooooooooooooooooooo</h1>
-              </Route>
-
-              <Route path = "/">
-                <h1>Home Screen</h1>
-                <Chat />
-              </Route>
-            
+              <Sidebar /> 
             </Switch>
 
           </BrowserRouter>
+  
+          <Chat messages = {messages} />
 
-          <Chat />
         </div>
              
       )
@@ -77,7 +64,6 @@ function App({ username }){
         <Login />
 
       </div>
- 
         
     )    
     }

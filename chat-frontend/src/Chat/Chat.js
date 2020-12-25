@@ -5,45 +5,18 @@ import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon"
 import MicIcon from "@material-ui/icons/Mic"
 import axios from "axios"
 import React, {useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
 import "./Chat.css"
 import {connect} from "react-redux"
 
 
 
-function Chat({ username }){
+function Chat({ username, messages }){
     const [seed, setSeed] = useState("")
     const [input, setInput] = useState("")
-    const [rooms, setRooms] = useState([])
-    const [curRoomID, setCurRoomID] = useState("")
-    //const {roomId} = useParams()
-    const [messages, setMessages] = useState([])
-   // console.log(roomId)
-    
-    useEffect(() => {
-       /* if(roomId){
-            axios.get("http://localhost:9000/rooms")
-                .then((response) => {
-                    setRooms(response.data)                
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
+ 
+    const date = String((new Date().getMonth() + 1) + '/' + new Date().getDate() + '/' + (new Date().getFullYear())) 
 
-            rooms.forEach(room => {
-                if(room._id === roomId){
-                    getRoomMessages(room._id)
-                    setCurRoomID(room._id)
-                }        
-            })
-            console.log(rooms)
-            console.log(curRoomID)
-            
-        }*/
-        getRoomMessages()
-    }, [])
-
-
+/*
     function getRoomMessages(){
         axios.get(`http://localhost:9000/messages/sync`)
         .then((response) => {
@@ -52,7 +25,7 @@ function Chat({ username }){
         .catch((error) => {
             console.log(error)
         })
-/*
+
         axios.get(`http://localhost:9000/rooms/${roomID}/messages`)
             .then((response) => {
                 setMessages(response.data.messages)
@@ -60,23 +33,17 @@ function Chat({ username }){
             .catch((error) => {
                 console.log(error)
             })
-            */
-    }
+            
+    }*/
 
 
     const sendMessage = (e) => {
         e.preventDefault()
-        axios.post(`http://localhost:9000/rooms/${curRoomID}/messages`, {
-            message: input,
-            name: "Other Mo",
-            timestamp: "2 seconds ago",
-            received: false
-        })
 
         axios.post("http://localhost:9000/messages/new", {
             message: input,
-            name: "Other Mo",
-            timestamp: "2 seconds ago",
+            name: username,
+            timestamp: date,
             received: false
         })
 
@@ -95,18 +62,18 @@ function Chat({ username }){
                    <Avatar src = {`https://avatars.dicebear.com/api/human/${seed}.svg`} />
 
                    <div className = "chat_headerInfo">
-                       <h3>Room name</h3>
-                       <p>Last seen at...</p>
+                       <h3>Main Room</h3>
+                       <p>Last seen some time ago...</p>
                    </div>
                    <div className = "chat_headerRight">
                        <IconButton>
-                           <SearchOutlined />
+                           <SearchOutlined style = {{color: "white"}} />
                        </IconButton>
                        <IconButton>
-                           <AttachFile />
+                           <AttachFile style = {{color: "white"}} />
                        </IconButton>
                        <IconButton>
-                           <MoreVert />
+                           <MoreVert style = {{color: "white"}} />
                        </IconButton>
                    </div>
             
@@ -114,11 +81,11 @@ function Chat({ username }){
 
                <div className = "chat_body">
                    {messages.map((message) => (
-                        // eslint-disable-next-line no-template-curly-in-string
+                        
                         <p
-                            className = {`chat_message ${message.received && "chat_reciever"}`}
+                            className = {`chat_message ${message.name === username && "chat_reciever"}`}
                         >
-                            <span className = "chat_name">{message.name} </span>           
+                            <span style = {{color: "black"}} className = "chat_name">{message.name} </span>           
                             {message.message}
                             <span className = "chat_timestamp"> {message.timestamp} </span>
                         </p>
@@ -126,12 +93,12 @@ function Chat({ username }){
                </div>
 
                <div className = "chat_footer">
-                    <InsertEmoticonIcon />
+                    <InsertEmoticonIcon style = {{color: "white"}} />
                     <form>
-                        <input value = {input} onChange = {e => setInput(e.target.value)} placeholder = "Type a message" type = "text" />
+                        <input style = {{backgroundColor: "lightgrey", color: "black"}} value = {input} onChange = {e => setInput(e.target.value)} placeholder = "Type a message" type = "text" />
                         <button onClick = {sendMessage} type = "submit">Send a message</button>
                     </form>
-                    <MicIcon />
+                    <MicIcon style = {{color: "white"}} />
                </div>
         
             </div>

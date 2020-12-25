@@ -1,0 +1,99 @@
+.login-screen{
+    display: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid grey;
+    border-radius: 5px 5px 5px 5px;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    box-shadow: -1px 10px 20px -6px rgba(0, 0, 0, 0.75);
+    padding: 50px;
+}
+
+body{
+    color: white;
+}
+
+#login-pos{
+    position: relative;
+    top: 50%;
+}
+
+#slogan{
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 60px;
+}
+
+#title{
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+#welcome{
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#google-btn{
+    width: 100%;
+    padding: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: white;
+    background-color: #4285f4;
+    line-height: normal;
+    text-align: center;
+    font-weight: 900;
+}
+
+#google-btn:hover{
+    transition-property: box-shadow, transform;
+    transition-duration: 0.2s, 0.2s;
+    transition-timing-function: ease;
+    transition-delay: 0s, 0s;
+
+}
+
+
+
+
+@media only screen and (min-width : 360px) and (max-width: 767px){
+    body{
+        font-size: 6px;
+    }
+    .login-screen{
+        
+        width: 75%;
+
+    }
+
+    #google-btn{
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    
+    #login-pos{
+        top: 30%;
+    }
+
+    #welcome{
+        font-size: 2.25rem;
+    }
+
+    #slogan{
+        font-size: 0.75rem;
+    }
+
+
+}

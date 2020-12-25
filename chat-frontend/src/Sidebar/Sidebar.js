@@ -5,16 +5,14 @@ import ChatIcon from '@material-ui/icons/Chat'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import {Avatar, IconButton} from "@material-ui/core";
 import { SearchOutlined } from '@material-ui/icons'
-import SidebarChatTwo, {SidebarCha} from "./SidebarChat";
+import SidebarChatTwo from "../SidebarChat/SidebarChat";
 import axios from "axios"
-import { useStateValue } from './StateProvider'
 import {connect} from "react-redux"
 
 
 
-function Sidebar({ username }) {
+function Sidebar({ username, userInfo }) {
     const[rooms, setRooms] = useState([])
-    //const [{user}, dispatch] = useStateValue()
 
     useEffect(() => {
         if(rooms.length === 0){
@@ -42,16 +40,16 @@ function Sidebar({ username }) {
         <div className = "sidebar">
             
             <div className = "sidebar_header">
-                <Avatar src = {username.photoURL} />
+                <Avatar src = {userInfo.user.photoURL} />
                  <div className = "sidebar_headerRight">
                     <IconButton>
-                        <DonutLargeIcon />
+                        <DonutLargeIcon style = {{color: "white"}} />
                     </IconButton>
                     <IconButton>
-                        <ChatIcon />
+                        <ChatIcon style = {{color: "white"}} />
                     </IconButton>
                     <IconButton>
-                        <MoreVertIcon />
+                        <MoreVertIcon style = {{color: "white"}} />
                     </IconButton>
                 </div>
 
@@ -59,8 +57,8 @@ function Sidebar({ username }) {
             
             <div className= "sidebar_search">       
                 <div className = "sidebar_searchContainer">
-                    <SearchOutlined />
-                    <input placeholder="Search or start new chat" type = "text" />
+                    <SearchOutlined style = {{color: "white"}} />
+                    <input style = {{backgroundColor: "lightgrey", borderRadius: "20px", padding: "3px"}} placeholder="Search or start new chat" type = "text" />
                 </div>
             </div>
 
@@ -80,7 +78,10 @@ function Sidebar({ username }) {
 
 
 const mapStateToProps = state => {
-    return {username: state.username}
+    return {
+        username: state.username,
+        userInfo: state.userInfo
+    }
   }
   
 export default connect(mapStateToProps)(Sidebar);

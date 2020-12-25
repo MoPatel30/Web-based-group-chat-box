@@ -1,3 +1,7 @@
+body{
+    color: white;
+}
+
 .chat{
     display: flex;
     flex-direction: column;
@@ -22,12 +26,13 @@
 }
 
 .chat_headerInfo > p{
-    color: gray;
+    color: white;
 }
 
 .chat_body{
     flex: 1;
-    background-color: lightgoldenrodyellow;
+    height: 100vh;
+    background-color:#eaf4fc;
     background-repeat: repeat;
     background-position: center;
     padding: 30px;
@@ -40,13 +45,14 @@
     padding: 10px;
     width: fit-content;
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: black;
     margin-bottom: 30px;
+    color: white;
 }
 
 .chat_reciever{
     margin-left: auto;
-    background-color: greenyellow;
+    background-color: grey;
    
 
 }

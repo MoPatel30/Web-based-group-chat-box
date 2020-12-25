@@ -3,24 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import reducer, {initialState} from "./reducer";
-import {StateProvider} from "./StateProvider";
-import {Route} from "react-router-dom"
 import store from "./store/index"
 import {Provider} from "react-redux";
 
-//ReactDOM.render(<App />, document.getElementById('root'));
-/*
-    ReactDOM.render(
-   <React.StrictMode>     
-        <StateProvider initialState = {initialState} reducer = {reducer}>
-            <App />
-        </StateProvider>     
-    </React.StrictMode>,
-    document.getElementById("root"))
-*/
-
-console.log(<App />)
 ReactDOM.render(   
          <Provider store = {store}>
              <App />

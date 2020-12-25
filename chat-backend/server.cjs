@@ -4,7 +4,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 let Messages = require("./dbMessages.cjs")
 let Rooms = require("./dbRooms.cjs")
-let Pusher = require("pusher")
+const Pusher = require("pusher")
 const cors = require("cors")
 var bodyParser = require('body-parser'); // npm i body-parser
 
@@ -28,9 +28,16 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+/* cors replaces this
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.setHeader("Access-Control-Allow-Headers", "*")
+    next()
+})
+*/
 
 // DB config
-const connection_url = ""
+const connection_url = 
 mongoose.connect(connection_url,{
     useCreateIndex: true,
     useNewUrlParser: true,
@@ -56,8 +63,8 @@ db.once("open", () =>{
             const messageDetails = change.fullDocument
             pusher.trigger("messages", "inserted",
                 {
-                    name: messageDetails.name,
                     message: messageDetails.message,
+                    name: messageDetails.name, 
                     timestamp: messageDetails.timestamp,
                     received: messageDetails.received
                 }

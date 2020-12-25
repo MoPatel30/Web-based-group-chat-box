@@ -1,8 +1,8 @@
-import React, { Component, useState, useEffect, useParams } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import "./SidebarChat.css";
-import {Avatar, IconButton} from "@material-ui/core";
+import {Avatar} from "@material-ui/core";
 import {Link} from "react-router-dom"
-import axios from "./axios"
+import axios from "../axios"
 
 
 
@@ -23,7 +23,6 @@ function SidebarChatTwo(props){
                 name: roomName
             }
             ) 
-            // db stuff
         }
     }
     
@@ -32,8 +31,8 @@ function SidebarChatTwo(props){
                 <div className = "sidebarChat">
                     <Avatar src = {`https://avatars.dicebear.com/api/human/${seed}.svg`} />
                     <div className = "sidebarChat_info">
-                        <h2>{props.name}</h2> 
-                        <p> last message </p>
+                        <h2 style = {{color: "white", textDecoration: "none !important"}}>{props.name}</h2> 
+                        <p style = {{color: "white", textDecoration: "none !important"}}> Locked Room... </p>
                     </div>
                 </div>
             </Link>
