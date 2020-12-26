@@ -15,8 +15,10 @@ function Chat({ username, messages }){
     const [input, setInput] = useState("")
  
     const date = String((new Date().getMonth() + 1) + '/' + new Date().getDate() + '/' + (new Date().getFullYear())) 
+    const lastSeenTime = messages[messages.length - 1].timestamp
+    const lastSeenName = messages[messages.length - 1].name
 
-/*
+    /*
     function getRoomMessages(){
         axios.get(`http://localhost:9000/messages/sync`)
         .then((response) => {
@@ -63,7 +65,7 @@ function Chat({ username, messages }){
 
                    <div className = "chat_headerInfo">
                        <h3>Main Room</h3>
-                       <p>Last seen some time ago...</p>
+                        <p>Last seen {lastSeenTime} from {lastSeenName}</p>
                    </div>
                    <div className = "chat_headerRight">
                        <IconButton>
@@ -85,7 +87,7 @@ function Chat({ username, messages }){
                         <p
                             className = {`chat_message ${message.name === username && "chat_reciever"}`}
                         >
-                            <span style = {{color: "black"}} className = "chat_name">{message.name} </span>           
+                            <span style = {{color: "#222222"}} className = "chat_name">{message.name} </span>           
                             {message.message}
                             <span className = "chat_timestamp"> {message.timestamp} </span>
                         </p>
@@ -95,7 +97,7 @@ function Chat({ username, messages }){
                <div className = "chat_footer">
                     <InsertEmoticonIcon style = {{color: "white"}} />
                     <form>
-                        <input style = {{backgroundColor: "lightgrey", color: "black"}} value = {input} onChange = {e => setInput(e.target.value)} placeholder = "Type a message" type = "text" />
+                        <input style = {{backgroundColor: "lightgrey", color: "#222222"}} value = {input} onChange = {e => setInput(e.target.value)} placeholder = "Type a message" type = "text" />
                         <button onClick = {sendMessage} type = "submit">Send a message</button>
                     </form>
                     <MicIcon style = {{color: "white"}} />

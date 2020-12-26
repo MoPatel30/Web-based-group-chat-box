@@ -7,7 +7,7 @@ let Rooms = require("./dbRooms.cjs")
 const Pusher = require("pusher")
 const cors = require("cors")
 var bodyParser = require('body-parser'); // npm i body-parser
-
+require("dotenv").config()
 //import {express} from "express"
 
 
@@ -17,12 +17,14 @@ const port = process.env.PORT || 9000
 
 
 const pusher = new Pusher({
-
-
+    appId: process.env.PUSHER_appId,
+    key: process.env.PUSHER_key,
+    secret: process.env.PUSHER_secret,
+    cluster: process.env.PUSHER_cluster,
+    useTLS: true
 });
 
 
-//middleware
 app.use(express.json())
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -37,7 +39,8 @@ app.use((req, res, next) => {
 */
 
 // DB config
-const connection_url = 
+const connection_url = process.env.DB_URL
+
 mongoose.connect(connection_url,{
     useCreateIndex: true,
     useNewUrlParser: true,

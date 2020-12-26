@@ -31,7 +31,7 @@ body{
 .sidebar_search{
     display: flex;
     align-items: center;
-    background-color: black;
+    background-color: #222222;
     height: 39px;
     padding: 10px;
 }

@@ -29,7 +29,6 @@ function App({ username }){
 
     const channel = pusher.subscribe("messages")
     channel.bind("inserted", (newMessage) => {
-      alert(newMessage)
       setMessages([...messages, newMessage])
     })
     

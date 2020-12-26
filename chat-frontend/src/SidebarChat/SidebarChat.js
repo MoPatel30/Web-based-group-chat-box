@@ -27,15 +27,14 @@ function SidebarChatTwo(props){
     }
     
     return !props.addNewChat ? (
-            <Link to = {`/rooms/${props.id}`}>      
-                <div className = "sidebarChat">
-                    <Avatar src = {`https://avatars.dicebear.com/api/human/${seed}.svg`} />
-                    <div className = "sidebarChat_info">
-                        <h2 style = {{color: "white", textDecoration: "none !important"}}>{props.name}</h2> 
-                        <p style = {{color: "white", textDecoration: "none !important"}}> Locked Room... </p>
-                    </div>
+                
+            <div className = "sidebarChat">
+                <Avatar src = {`https://avatars.dicebear.com/api/human/${seed}.svg`} />
+                <div className = "sidebarChat_info">
+                    <h2 style = {{color: "white", textDecoration: "none !important"}}>{props.name}</h2> 
+                    <p style = {{color: "white", textDecoration: "none !important"}}> Locked Room... </p>
                 </div>
-            </Link>
+            </div>
 
     ): (
         <div onClick={createChat} className = "sidebarChat">
