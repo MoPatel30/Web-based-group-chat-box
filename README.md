@@ -1,5 +1,7 @@
 # Web-based Groupchat Box
 
+![Main Page](chat-frontend/src/imgs/chatbox.JPG)
+
 ## About
 A groupchat web-app that allows users to chat with one another. 
 
