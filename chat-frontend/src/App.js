@@ -12,8 +12,6 @@ import {connect} from "react-redux"
 function App({ username }){
   const [messages, setMessages] = useState([])
 
-  console.log(username)
-
   useEffect(() => {
     axios.get("/messages/sync")
       .then((response) => {

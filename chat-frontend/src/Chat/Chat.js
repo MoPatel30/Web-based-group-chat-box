@@ -3,7 +3,7 @@ import { Avatar, IconButton } from '@material-ui/core'
 import { AttachFile, MoreVert, SearchOutlined } from '@material-ui/icons'
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon"
 import MicIcon from "@material-ui/icons/Mic"
-import axios from "axios"
+import axios from "../axios"
 import React, {useState, useEffect} from 'react'
 import "./Chat.css"
 import {connect} from "react-redux"
@@ -13,10 +13,17 @@ import {connect} from "react-redux"
 function Chat({ username, messages }){
     const [seed, setSeed] = useState("")
     const [input, setInput] = useState("")
- 
     const date = String((new Date().getMonth() + 1) + '/' + new Date().getDate() + '/' + (new Date().getFullYear())) 
-    const lastSeenTime = messages[messages.length - 1].timestamp
-    const lastSeenName = messages[messages.length - 1].name
+    const [lastSeenTime, setLastSeenTime] = useState("") 
+    const [lastSeenName, setLastSeenName] = useState("") 
+    
+    
+    useEffect(() => {
+        if((messages.length - 1) !== -1){
+            setLastSeenTime(messages[messages.length - 1].timestamp)
+            setLastSeenName(messages[messages.length - 1].name)
+        }
+    }, [messages])
 
     /*
     function getRoomMessages(){
@@ -42,7 +49,7 @@ function Chat({ username, messages }){
     const sendMessage = (e) => {
         e.preventDefault()
 
-        axios.post("http://localhost:9000/messages/new", {
+        axios.post("/messages/new", {
             message: input,
             name: username,
             timestamp: date,
@@ -62,10 +69,10 @@ function Chat({ username, messages }){
             <div className = "chat">
                <div className = "chat_header">
                    <Avatar src = {`https://avatars.dicebear.com/api/human/${seed}.svg`} />
-
+                   <p style = {{marginLeft: "5px"}}>Last seen {lastSeenTime} from {lastSeenName}</p>
                    <div className = "chat_headerInfo">
                        <h3>Main Room</h3>
-                        <p>Last seen {lastSeenTime} from {lastSeenName}</p>
+                       
                    </div>
                    <div className = "chat_headerRight">
                        <IconButton>

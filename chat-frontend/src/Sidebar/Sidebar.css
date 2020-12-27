@@ -5,8 +5,7 @@ body{
 .sidebar{
     display: flex;
     flex-direction: column;
-    flex: 0.35;
-    
+    flex: 0.35; 
 }
 
 .sidebar_header{
@@ -62,3 +61,4 @@ body{
     background-color: white;
     overflow: scroll;
 }
+

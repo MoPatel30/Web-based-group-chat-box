@@ -6,7 +6,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert'
 import {Avatar, IconButton} from "@material-ui/core";
 import { SearchOutlined } from '@material-ui/icons'
 import SidebarChatTwo from "../SidebarChat/SidebarChat";
-import axios from "axios"
+import axios from "../axios"
 import {connect} from "react-redux"
 
 
@@ -16,32 +16,26 @@ function Sidebar({ username, userInfo }) {
 
     useEffect(() => {
         if(rooms.length === 0){
-            axios.get("http://localhost:9000/rooms")
+            axios.get("/rooms")
                 .then((response) => {
-                    console.log(response.data)
-                    setRooms(response.data)
-                        
+                    setRooms(response.data)                       
                 })
                 .catch((error) => {
                     console.log(error)
-                })
-        
+                })        
         }
         
     }, [rooms])
-    console.log(username)
-
-
-    function setRoomId(key){
-        console.log(key)
-    }
+    
 
     return (
         <div className = "sidebar">
             
             <div className = "sidebar_header">
                 <Avatar src = {userInfo.user.photoURL} />
+                <h2>{username}</h2>
                  <div className = "sidebar_headerRight">
+                     
                     <IconButton>
                         <DonutLargeIcon style = {{color: "white"}} />
                     </IconButton>

@@ -1,6 +1,5 @@
 import React from 'react'
 import "./Login.css"
-import {Button} from "@material-ui/core"
 import {auth, provider} from "../firebase"
 import store from "../store/index"
 import {connect} from "react-redux"
