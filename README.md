@@ -3,19 +3,17 @@
 ![Main Page](chat-frontend/src/imgs/chatbox.JPG)
 
 ## About
-A groupchat web-app that allows users to chat with one another. 
+A groupchat web-app that allows users login and chat with other users in a global room. 
 
-I am practicing my full-stack development skills by building a messenger web-app that has full front-end and back-end functionality.
+I built this to practice my full-stack development skills. This is a messenger web-app that has full front-end and back-end functionality.
 
-From this project, I want to learn more about full-stack development (building REST APIs, testing, database and 3rd party platform usage), get better using powerful databases like MongoDB, learn more about express and nodejs, and much more.
+From this project, I learned more about full-stack development (building REST APIs, testing, database and 3rd party platform usage), got better using powerful databases like MongoDB, learned more about express and nodejs, and much more.
 
 
 ## Languages and Tools
 
-This project is being developed using the MERN Stack. (MongoDB, ExpressJS, ReactJS, NodeJS)
+Front-end: React, Redux, HTML/CSS, Bootstrap, MaterialUI
 
-I've used the MERN stack before and am pretty comfortable with how it works. Since building a full-on messenger web-app is kind of challenging, I will be using various online resources to successfully build it.
+Back-end: MongoDB, Express, Node, Pusher (enable real-time mongoDB usage), Firebase (Client-side hosting & authentication), Heroku (Server-side hosting)
 
-Firebase will be used to host the web-app because Firebase is the best!
-
-
+Pusher was used to enable real-time usage of mongoDB so new messages pop up as people send them. Firebase was used to host the frontend of the web-app, while heroku was used to host the server-side of the web-app. They're hosted seperately but communicate to each through the use of packages like axios and cors. 

@@ -73,8 +73,9 @@ body{
         font-size: 6px;
     }
     .login-screen{
-        
-        width: 75%;
+        margin: auto;
+        width: 50%;
+        margin-bottom: 75%;
 
     }
 
